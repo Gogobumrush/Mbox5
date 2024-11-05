@@ -11,13 +11,15 @@
 ---
 
 **Prio 2**
+**Note: Add/Remove commas depending on your mana needs**
 ```
 /assist focus
-/castsequence [nochanneling] reset=combat , Shadow Bolt, Shadow Bolt, Shadow Bolt, Shadow Bolt, Life Tap
+/castsequence [nochanneling] reset=combat ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Life Tap
 ```
 
 ---
 **Prio 3**
+**Note: Remove Blood Fury if not Orc**
 ```
 /a focus
 /use [nochanneling] 13

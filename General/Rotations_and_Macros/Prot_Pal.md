@@ -93,3 +93,9 @@
 
 # Boss Specific Macros
 
+**Curator**
+```
+/tar Astral Flare
+```
+
+---
