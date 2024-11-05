@@ -25,6 +25,11 @@
 ## Opera, ON WITH THE SHOW!
 
 ### Dorothy
+Do whatever feels comfortable my kill order is:
+
+Tin Man > Roar > toto > Straw man> dorothy 
+
+- Can fear ward tank for the roar fear.
 
 ### Big Bad Wolf
 - Tank him next to 1 door, put group next to other door. 
@@ -49,6 +54,14 @@
 
 ## Aran
 
+- Put whole team except tank behind the table on the right when you walk in
+- Put up fire aura or frost aura
+- Kick Spells to reduce damage. Arcane missiles do most damage
+
+- Either kill or banish/fear elementals this will help tremenedously.
+
+- If you get polymorphed be sure to position everyone back behind the table otherwise you might die to arcane explosion
+
 ## Spite
 
 Iuno I haven't beat him yet =D
@@ -60,3 +73,8 @@ Iuno I haven't beat him yet =D
 
 ## Prince
 
+- I use the warlock detect invis to gauage my distance
+- I put the tank straight ahead on the right in the dent in the wall
+- Make sure to take Shadow Word: Death off bar (see macros) 
+- I play from Priest persective since range sucks on flay and run him out on the explosion
+- I have a follow healer macro in case you get infernal on your team. 

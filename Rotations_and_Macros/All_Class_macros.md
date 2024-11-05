@@ -1,3 +1,5 @@
+[] TODO ADD some general language for macros to understand and link out to macros page.
+
 **TBC Unhittable Macro it tells you your current total avoidance + block**
 ```
 /script DEFAULT_CHAT_FRAME:AddMessage("Need 102.4 combined avoidance. Currently at:",0.8,0.8,1)
