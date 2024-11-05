@@ -1,6 +1,5 @@
 **Note:** I am not a Weak aura expert. I have made the majority of these myself but if you feel uncomfortable copying my export string, feel free to ping me on the discord and I can walk through making your own.
 
-![image](images/raid_buffs.PNG)
 
 # Description
 Raid buffs
