@@ -1,0 +1,17 @@
+ActionBarSaver
+AtlasLoot
+BindPad
+Clique
+DBM
+Details
+DrummerBoy
+ElvUI
+Grid
+MobInfo2
+Omen
+PallyPower
+Postal
+RaidCooldowns
+SolarianAlarm
+Talented
+WeakAuras

@@ -1,0 +1,309 @@
+//================================================================
+// SAMPLE SCRIPT FOR FIVE WOW'S ON ONE PC
+//
+//
+// Toggle the Caps Lock key to turn sharing hotkeys off and on. (You
+// can change this if you want to Scroll Lock or Num Lock, just like you can change
+// everything else with HotkeyNet.)
+//
+// Requires HotkeyNet build 148 or higher.
+//
+// For more info, go to www.hotkeynet.com
+//
+// Note: Works best with WoW in windowed mode. Can be fullscreen windowed. 
+//================================================================
+
+//----------------------------------
+// TO LAUNCH GAME WINDOWS AND LOGIN, 
+// fill in your game file path and login info where indicated below.
+// And then follow these steps:
+// 1. Press Alt Ctrl L -- this will launch and rename 5 copies of WoW.
+// 2. Press Ctrl Shift L -- this will login each window. 
+//----------------------------------
+ 
+
+//-----------------------------------------------------------
+// SUBROUTINE TO LAUNCH AND RENAME A COPY OF WOW.  
+// Note: You need to edit the "Run" line to include your specific Wow.exe directory.
+// Note: You can adjust the <wait> number up or down to fine-tune your launch speed,
+//       basically gotta give your computer a moment to launch the program before it 
+//       tries to identify the window.  
+//-----------------------------------------------------------
+<Command LaunchAndRename>
+   <SendPC %1%>
+      <Run "C:\YourGameFolder\Wow.exe">
+ 	<wait 1000>          
+      <RenameWin "World of Warcraft" %2%>
+
+//-----------------------------------------------------------
+// HOTKEY TO LAUNCH AND RENAME YOUR WOW WINDOWS
+// With CapsLock On, press Alt+Ctrl+L to launch 5 WoW windows and rename them as 
+// WoW1, Wow2, etc. 
+//-----------------------------------------------------------
+<Hotkey CapsLockOn Alt Ctrl L>
+    <LaunchAndRename Local WoW1>
+    <LaunchAndRename Local WoW2>
+    <LaunchAndRename Local WoW3>
+    <LaunchAndRename Local WoW4>
+    <LaunchAndRename Local WoW5>
+
+
+//-----------------------------------------------------------
+// PRESS CTRL R TO RENAME WOW'S IF YOU LAUNCH THEM MANUALLY.
+//-----------------------------------------------------------
+<Hotkey CapsLockOn Ctrl R>
+    <SendPC local>
+       <RenameWin "World of Warcraft" WoW5>
+       <RenameWin "World of Warcraft" WoW4>
+       <RenameWin "World of Warcraft" WoW3>
+       <RenameWin "World of Warcraft" WoW2>
+       <RenameWin "World of Warcraft" WoW1>
+
+//-----------------------------------------------------------
+// DEFINE MAIL LABELS FOR SENDING KEY STROKES.
+//-----------------------------------------------------------
+<Label w1 Local SendWinM WoW1>
+<Label w2 Local SendWinM WoW2>
+<Label w3 Local SendWinM WoW3>
+<Label w4 Local SendWinM WoW4>
+<Label w5 Local SendWinM WoW5>
+
+
+//-----------------------------------------------------------
+// AUTO-LOGIN BUTTON.
+// Note: Insert your account/password where indicated. If it messes things up, you may
+//       need to change the wait times (it's in milliseconds). 
+//-----------------------------------------------------------
+
+<Hotkey CapsLockOn Ctrl Shift L>
+	<TargetWin WoW1>
+	<SetActiveWin>
+	<wait 500>
+	<Text AccountName>
+	<Key Tab>
+	<Text Password>
+	<wait 200>
+	<Key Enter>
+	<wait 200>
+
+	<TargetWin WoW2>
+	<SetActiveWin>
+	<wait 500>
+	<Text AccountName>
+	<Key Tab>
+	<Text Password>
+	<wait 200>
+	<Key Enter>
+	<wait 200>
+
+	<TargetWin WoW3>
+	<SetActiveWin>
+	<wait 500>
+	<Text AccountName>
+	<Key Tab>
+	<Text Password>
+	<wait 200>
+	<Key Enter>
+	<wait 200>
+
+	<TargetWin WoW4>
+	<SetActiveWin>
+	<wait 500>
+	<Text AccountName>
+	<Key Tab>
+	<Text Password>
+	<wait 200>
+	<Key Enter>
+	<wait 200>
+
+	<TargetWin WoW5>
+	<SetActiveWin>
+	<wait 500>
+	<Text AccountName>
+	<Key Tab>
+	<Text Password>
+	<wait 200>
+	<Key Enter>
+	<wait 200>
+
+
+
+//-----------------------------------------------------------
+// DEFINE HOTKEYS FOR ALL KEY COMBINATIONS THAT WILL GET
+// SENT TO WOW WINDOWS. ADD MORE KEY COMBO'S IF YOU WANT.
+// You can see this sets it to broadcast nearly the whole keyboard,
+// including the numpad, punctuation, and F6-F12 keys. Some keys
+// are skipped because we define them separately below. 
+// Take out or add keys as desired.   
+// The Oem keys will differ based on your keyboard region. 
+// To find out the code for any key, press the key and look 
+// at the top right of the HKN window.  
+//-----------------------------------------------------------
+
+<Hotkey CapsLockOn A-W, Y-Z, 0, 2-9, Plus, Minus, F6-F12, Oem3, Oem4, Oem6, Oem5, Oem7, Oem1, Numpad0-Numpad9, Decimal, Period, Multiply, Comma, Divide except W, A, S, D, Q, E>
+  <SendLabel w1, w2, w3, w4, w5>
+    <Key %Trigger%>
+
+
+//----------------------------------------------------------
+// Multi-key functionality, or what we sometimes call "Prio Chain".
+//    By defining "1" to send multiple keystrokes at the same time, you can set up a character to do 
+// useful things based on in-game keybindings. I find it useful for situations where I want a character to 
+// always spam an ability as soon as the cooldown is up.
+// For example, setup your elemental shaman to have Chain Lightning bound to Ctrl 4, and Lightning Bolt bound to 1. 
+// This method will always cast CL if it's available, otherwise will proceed to cast LB.
+// Or bind Prot Paladin's Holy Shield on Ctrl 4, Consecration to Ctrl 3, Exorcism to Ctrl 2, and a
+// Judgement/Seal castsequence to 1. He will prioritize casting each spell in order if it's available.
+// If a spell is on cooldown, or not valid (i.e. Exorcism on invalid target), it will essentially just skip it
+// and proceed to the next available spell. 
+// Or say you want a character to always cast Drums of Battle as soon as it's able to. Well, just drag your drums into 
+// an open key spot in the Prio Chain and he'll spam it like a champ. 
+// You can set up wonderfully functional sequences to handle your characters. 
+//
+// Anyway, this is the MAIN BUTTON I spam during fights, with keys mapped to whatever abilities/macros you need.
+//
+// NOTE: You will need to change your Keybinds in-game to correspond with these keys. 
+// If you leave keybinds as default, I believe Ctrl 1-4 will be bound to the Stance/Aura/Form bar. We don't want that.
+//----------------------------------------------------------
+
+<Hotkey CapsLockOn 1>
+  <SendLabel w1,w2,w3,w4,w5>
+    <Key Ctrl 4>
+    <Key Ctrl 3>
+    <Key Ctrl 2>
+    <Key Ctrl 1>
+    <Key 1>
+
+
+//-----------------------------------------------------------
+// DEFINE MOVEMENT KEYS THAT WILL GET SENT.
+// ADD MORE KEYS IF YOU WANT. 
+// ALSO, in-game I bound Numpad- to sit/fly down and Numpad+ to jump/fly up
+// Also, in-game I UNBIND up, down, left, right from my tank character, enabling me to use 
+// these arrow keys to only move the team while leaving my tank stationary.
+//-----------------------------------------------------------
+
+<MovementHotkey CapsLockOn up, down, left, right, NumpadMinus, NumpadPlus>
+  <SendLabel w1, w2, w3, w4, w5>
+    <Key %Trigger%>
+
+
+//----- Strafe left/right just the slave characters with Ctrl-Q/E  ------
+
+<MovementHotkey CapsLockOn Ctrl Q, E>
+  <SendLabel w2, w3, w4, w5>
+    <Key %Trigger%>
+
+
+//----- Line Spread Movement Formation: In-game, bind Shift L to toggle on/off Walk speed. 
+// Holding X will spread the team out in a straight line. 
+// Note: Occasionally, if you just tap X briefly, one or more characters may get stuck in walk speed. 
+// You will need to swap to that character and press Shift L to toggle back to run speed.  -----
+
+<Hotkey CapsLockOn X>
+  <SendLabel w2>
+    <KeyDown Q>
+    <Key Shift L>
+  <SendLabel w3>
+    <KeyDown Q>
+  <SendLabel w4>
+    <KeyDown E>
+  <SendLabel w5>
+    <KeyDown E>
+    <Key Shift L>
+
+<HotkeyUp CapsLockOn X>
+  <SendLabel w2>
+    <KeyUp Q>
+    <Key Shift L>
+  <SendLabel w3>
+    <KeyUp Q>
+  <SendLabel w4>
+    <KeyUp E>
+  <SendLabel w5>
+    <KeyUp E>
+    <Key Shift L>
+
+
+
+//-----------------------------------------------------------
+// BROADCAST MOUSE CLICKS. 
+//-----------------------------------------------------------
+
+
+//  This first chunk will allow you to broadcast any click to all windows by holding down the 
+//  "Oem3" key - on US keyboards, that's the squiggle key in upper left corner. 
+//  Note: you can see what HKN calls each key by looking at the upper right window of HKN when you press the button.
+//  Useful for lining up your characters and then all clicking on an npc or looting at the same time.
+
+
+<UseKeyAsModifier Oem3>
+<Hotkey CapsLockOn Oem3 LButton, MButton, RButton, Button4, Button5>
+   <SendLabel w1, w2, w3, w4, w5>
+      <ClickMouse %TriggerMainKey%>
+
+//  This second part will broadcast your clicks to just window 2 (i.e. Healer) whenever your mouse is over the rectangle defined in pixels.
+//  Change the pixels to match your Grid frame (or other raid frames) for easier click healing. Pixels are: x y width height (x,y of the upper left corner)
+//  The <Passthrough> will also let your current window receive the clicks as well -- so I recommend either taking out the Lbutton
+//  or binding Left click to something like Cleanse on your tank, or just an empty macro, so that you can use Left click for healing 
+//  without constantly selecting that target.
+
+<Hotkey CapsLockOn LButton, MButton, RButton, Button4, Button5>
+	<Passthrough>
+	<If MouseIsOverScreenRect 282 573 276 155>
+	<SaveMousePos>
+	<Wait 5>
+	<SendLabel w2>
+	<ClickMouse Scale %Trigger%>
+	<Wait 5>
+	<RestoreMousePos>
+
+
+//-----------------------------------------------------------
+// Quick Window Swap - F1 - F5 to switch to that window.
+// Note: I previously used <SetForegroundWin> for this, but that stopped
+//       working for me. If this <SetActiveWin> function doesn't work for you, 
+//       you could try using <SetForegroundWin> again instead.
+//-----------------------------------------------------------
+
+<Hotkey CapsLockOn F1>
+	<SendPC local>
+	<TargetWin WoW1>
+	<SetActiveWin>
+<Hotkey CapsLockOn F2>
+	<SendPC local>
+	<TargetWin WoW2>
+	<SetActiveWin>
+<Hotkey CapsLockOn F3>
+	<SendPC local>
+	<TargetWin WoW3>
+	<SetActiveWin>
+<Hotkey CapsLockOn F4>
+	<SendPC local>
+	<TargetWin WoW4>
+	<SetActiveWin>
+<Hotkey CapsLockOn F5>
+	<SendPC local>
+	<TargetWin WoW5>
+	<SetActiveWin>
+
+
+
+//-----------------------------
+// SECONDARY SPAM FUNCTIONALITY
+// You can define a second set of hotkeys that will only activate when both CapsLock and ScrollLock are on.
+// This is useful for setting up a different set of keys to send for different phases of a fight. 
+// For example, if you need to save dps cooldowns for specific burn phases, you can define keysends so that
+//     with just CapsLockOn (see above) it does normal dps rotation, and then when you also turn on ScrollLockOn
+//     it will also cast your cooldowns or other necessary spells. 
+// For now, this key is defined the same as the Main spam above. If you want to utilize this, then change the 
+//     Keys below according to your needs.
+//-----------------------------
+
+<Hotkey CapsLockOn ScrollLockOn 1>
+<SendLabel w1, w2, w3, w4, w5>
+    <Key Ctrl 4>
+    <Key Ctrl 3>
+    <Key Ctrl 2>
+    <Key Ctrl 1>
+    <Key 1>
