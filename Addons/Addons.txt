@@ -1,3 +1,5 @@
+This is a list of the Addons I use.
+
 ActionBarSaver
 AtlasLoot
 BindPad
