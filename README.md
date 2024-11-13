@@ -13,6 +13,11 @@ The biggest recommendation I can give is to take your time with your setup. Prac
 Go run a dungeon, write down all the issues you notice and repeat the process. This will save you a TON of time once you step into raids.
 
 
+## Hotkeynet Site
+
+https://web.archive.org/web/20200315062318/http://hotkeynet.com/ref/functions.html
+
+
 
 ## Videos
 For some great videos references check out some of the other multiboxers and how they position and play.
