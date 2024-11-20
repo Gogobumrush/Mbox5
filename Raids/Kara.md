@@ -58,9 +58,11 @@ Tin Man > Roar > toto > Straw man> dorothy
 - Put up fire aura or frost aura
 - Kick Spells to reduce damage. Arcane missiles do most damage
 
-- Either kill or banish/fear elementals this will help tremenedously.
+- Either kill or banish/fear elementals this will help tremendously.
 
 - If you get polymorphed be sure to position everyone back behind the table otherwise you might die to arcane explosion
+
+- Your first few times dont be afraid to overheal until your gear gets better.
 
 ## Spite
 
