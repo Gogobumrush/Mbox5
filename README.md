@@ -15,6 +15,10 @@ Go run a dungeon, write down all the issues you notice and repeat the process. T
 
 ## Hotkeynet Site
 
+Download
+https://web.archive.org/web/20200315062243/http://hotkeynet.com/
+
+Functions: 
 https://web.archive.org/web/20200315062318/http://hotkeynet.com/ref/functions.html
 
 
@@ -26,8 +30,13 @@ Mystro has videos on almost every boss with a RSham and also with Resto druid. D
 
 https://www.youtube.com/@mystrobox
 
-### General
 
+https://www.youtube.com/@thegreatme8305
+
+### General
+Initial setup document
+TBC Totems available and what they do
+Rolling lifebloom guide for druid specific to M'uru I think
 
 
 ### Rotations

@@ -1,0 +1,190 @@
+Ok friends, as promised I finally sat down and typed out my secondary method for druid healing (aka
+autopilot method, aka turbo mode). I’m doing this now cuz mainly I enjoy nerding out on it, but also to
+show one example of how you can do some really really cool stuff with HKN if you start diving deep into
+it and get a little creative. But first:
+My basic healing setup is Numpad1-5 macroed to /cast [target=Name] Lifebloom, Numpad 6-0 macroed
+to /cast [target=Name] Regrowth. I also have Tank-specific Lifebloom bound to 5 for easier spamming
+when there's no raid damage. Then for more tank heals I have 0 bound to Rejuvenation and 9 to
+Swiftmend. Also bound to Numpad6-0 are PW: Shield from the spriest and Chain Heal from the ele
+shaman. So Numpad1-5 = normal heals, Numpad6-0 for bigger/help heals.
+I use this basic setup for 99% of fights (if healing on shaman I use same setup except Chain Heal instead
+of Lifebloom obvously).
+Now, when I reached M’uru, the sheer craziness of phase 2 with its constant window swaps, movement,
+and high damage everywhere forced me to develop a new system, one which would constantly toss out
+a Lifebloom rotation to the whole party with the goal of reliably rolling a full stack on all 5 targets. And it
+would do this completely without me ever needing to individually choose targets, but rather just cycle
+through on my normal dps spam. Now, Isboxer users have the wonderful option of doing this using their
+system to create steps and playing around with the “Do not advance to the next step for at least X
+seconds” settings so that while spamming your druid will switch to the next macro at the specified
+interval. I wanted to try to emulate this function with HotkeyNet.
+And the way do this (kind of) is through the use of <Toggle> and <DoHotkey> functions. <Toggle> will do
+the next defined action in the list in a cycle, returning to the first definition after the last is done (also
+known as “Round Robin”). <DoHotkey> does exactly what it says – it does Hotkey X, but the useful thing
+here is you can insert this into whatever hotkey definition you want and it kind of hijacks the key press
+and also activates the new <DoHotkey>, which can hold its own set of definitions separate from the
+source press. So long story short, this means that you can set up something like the following in your
+script:
+<Hotkey CapsLockOn ScrollLockOn 1, 2, 3, 4>
+<DoHotKey Hotkey Alt Ctrl H>
+<SendLabel w1, w2, w3, w4, w5>
+<Key %Trigger%>
+<Hotkey Alt Ctrl H>
+<Toggle>
+<SendLabel w2>
+<Key Numpad1>
+<Toggle>
+<SendLabel w2>
+<Key Numpad2>
+<Toggle>
+<SendLabel w2>
+<Key Numpad3>
+<Toggle>
+<SendLabel w2>
+<Key Numpad4>
+<Toggle>
+<SendLabel w2>
+<Key Numpad5>
+<Hotkey CapsLockOn Alt 1>
+<SendPC local>
+<ResetToggles>
+In my script I have all my “normal” hotkeys activated with CapsLockOn, so now if I want to activate
+“turbo mode”, I just also switch on ScrollLock and it activates this new set of definitions. Now what this
+script does is as follows: Each time I press 1, 2, 3, or 4 (or whatever keys you define here), it will also
+jump down and activate the next Toggle in the Hotkey below, while also sending out the regular keys to
+the 4 non-healer windows. These Toggles I have defined to cycle through Numpad1 through Numpad5
+(keys on which I have bound my “/cast [target=Name] Lifebloom macros”). And then if I ever want to
+make sure to reset the cycle back at Toggle 1, I can hit Alt-1.
+Voila! Done! That was simple, right? Well… not yet. The problem is, of course, that you are going to be
+spamming the keys rapidly, 5+ times per second. This will also cycle through the Toggles just as fast,
+meaning that sure your first press will toss a Lifebloom on Toon 1, but then when your healer’s GCD is
+ready, who knows where your Toggle will end up by then? This would more or less just toss your
+Lifeblooms at random targets… not what we’re going for. So we need a way of delaying advancing to the
+next Toggle. I tried experimenting with inserting <Wait> commands into the Toggle and it got very
+messy very fast and I don’t recommend it. If somehow you get that to work, awesome – let me know!
+(Ok, sure, the lazy cheater’s solution would be to simply use a gaming keyboard’s programmable macro
+functions to have it auto-fire the button every 1.3 seconds. But imo that’s lame, and would likely get you
+banned pretty quickly on some servers, and my own personal goal with multiboxing is to do it
+legitimately – that is, in a way that was perfectly legal during retail TBC or whatever xpac.)
+Instead, my answer for this is… MORE TOGGLES! By putting a lot more redundant Toggles into the list, it
+will take that many more presses before it gets to a Toggle containing a new Lifebloom target. Assume
+with me that my general spam speed is somewhere around 4 per second, and my Druid’s hasted GCD is
+1.25 seconds (Note: yes this is overkill for achieving the 5 rolling LBs, where you only theoretically need a
+sub 1.4s GCD, however I found in my personal testing getting to around 1.25-1.3 GCD gave me enough
+wiggle room to land all 5 LB stacks quite reliably – this is at something like 330 or so Haste Rating.) So,
+yes assuming a 1.25s GCD, and I’m spamming at 4 keypresses per second, then that means my goal
+would be for every 5th keypress to trigger a Toggle containing the next Lifebloom target. So now here is
+our new Toggle list definition:
+<Hotkey Alt Ctrl H>
+<Toggle>
+<SendLabel w2>
+<Key Numpad1>
+<Toggle>
+<SendLabel w2>
+<Key Numpad1>
+<Toggle>
+<SendLabel w2>
+<Key Numpad1>
+<Toggle>
+<SendLabel w2>
+<Key Numpad1>
+<Toggle>
+<SendLabel w2>
+<Key Numpad1>
+<Toggle>
+<SendLabel w2>
+<Key Numpad2>
+<Toggle>
+<SendLabel w2>
+<Key Numpad2>
+<Toggle>
+<SendLabel w2>
+<Key Numpad2>
+<Toggle>
+<SendLabel w2>
+<Key Numpad2>
+<Toggle>
+<SendLabel w2>
+<Key Numpad2>
+<Toggle>
+<SendLabel w2>
+<Key Numpad3>
+<Toggle>
+<SendLabel w2>
+<Key Numpad3>
+<Toggle>
+<SendLabel w2>
+<Key Numpad3>
+<Toggle>
+<SendLabel w2>
+<Key Numpad3>
+<Toggle>
+<SendLabel w2>
+<Key Numpad3>
+<Toggle>
+<SendLabel w2>
+<Key Numpad4>
+<Toggle>
+<SendLabel w2>
+<Key Numpad4>
+<Toggle>
+<SendLabel w2>
+<Key Numpad4>
+<Toggle>
+<SendLabel w2>
+<Key Numpad4>
+<Toggle>
+<SendLabel w2>
+<Key Numpad4>
+<Toggle>
+<SendLabel w2>
+<Key Numpad5>
+<Toggle>
+<SendLabel w2>
+<Key Numpad5>
+<Toggle>
+<SendLabel w2>
+<Key Numpad5>
+<Toggle>
+<SendLabel w2>
+<Key Numpad5>
+<Toggle>
+<SendLabel w2>
+<Key Numpad5>
+So there you have it, every 5th press is your next Lifebloom target. HURRAY WE DID IT! Sounds great,
+right? BUT WAIT, THERE’S MORE!
+This system works great… with one major condition: it requires a consistent spam speed. Now obviously
+during actual gameplay, your spam speed is going to vary a bit, faster/slower/whatever. The redundant
+Toggles provide a little cushion of wiggle room – like, if you hit 6 presses between GCDs instead of 5,
+that 6th Toggle will still be the next LB target. But it’s far from perfect. We can do better! And this is
+where my system devolves into near-madness level complication.
+Our goal: consistent spam speed. (That lazy cheater’s solution from above is sounding more and more
+tempting…) For our solution, delve back into your dreaded elementary school music class and pull out
+that nagging little tool called the metronome! Yes, friends, fire up an annoying click at the appropriate
+speed to correspond with your GCD/spam speed, and all we gotta do is “spam to the beat” – and there
+ya go, consistent spam speed! You can get a quick simple one by searching metronome on Google:
+For our sample speeds mentioned above – a sub-1.25s GCD with 4 presses per second – a metronome at
+120bpm while spamming eighth notes works perfectly. Actually, possibly a little too perfectly – my
+actual in game GCD is 1.23s, so there is the tiniest bit of wiggle room for the 5th press to land at 1.25s,
+but at least in my testing, it appears there is a little bit of leeway that the Game has and will usually let
+your cast go through even if you press the button at 1.2 seconds instead of 1.25, I’m guessing to
+compensate for differing latency times and such. But whatever the case, it works well for me! If you
+want to test out using different GCD and spam speeds, bust out your math skills, set your metronome
+appropriately, and go to town. It really works friends – in target dummy testing I was able to achieve a
+constant 5-stacked LB for well over 5 minutes straight without dropping off once. Now obviously, in real-
+raid situation, it’s much, much trickier.
+So yes, if you watch my M’uru videos, what you don’t hear is the fact that I’m wearing headphones with
+a constant beep beep beep beep going, and I’m spamming eighth notes on my keyboard the entire fight
+(as best I can anyway). And it produces a glorious rolling Lifebloom stacks across the entire party
+reliably, as long as I keep the beat going steady. Now, yes it does drop off occasionally when I mess up
+my spam hitting other keys and such, especially during phase 2 with crazy window swaps and all. But
+even in those times, the system will still keep throwing LBs around and will get your stacks rolling again.
+For my first M’uru fight, I just had my 1-4 keys defined as above for the Toggle, as these are the main
+keys I set up for various aspects of that fight. And then each time I hit a window swap key I would try to
+spam 2 quick sixteenth-note keys afterwards to try to get the Toggle back on track. But then I realized I
+could just also add the <DoHotkey> to my window swap keys, so now those presses will also advance
+the Toggle.
+So there you go. You’ve successfully turned WoW into a weird rhythm game like Dance Dance
+Revolution for your fingers. It’s definitely awkward at first, but as with everything, the more you practice
+it the smoother it gets, until at some point you realize Entropius is dead and you can finally stop
+spamming.
+Or… you can just pay for Isboxer and do all of this 1000% simpler.
